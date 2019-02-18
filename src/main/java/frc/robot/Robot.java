@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
     
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
@@ -50,7 +52,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    SmartDashboard.putBoolean("IntakeSensor", Robot.intakeSubsystem.intakeSensorState());
   }
+
 
   /**
    * This function is called once each time the robot enters Disabled mode.
@@ -119,7 +123,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putBoolean("IntakeSensor", Robot.intakeSubsystem.intakeSensorState());
+   
   }
 
   /**
